@@ -1,0 +1,20 @@
+color:
+  palette:
+    sky: "#262B36"
+    malibu: "#82B1FF"
+    marine: "#77C0CA"
+  background: white
+  foreground: sky
+  primary: marine
+
+logo:
+  medium: cover.png
+
+typography:
+  fonts:
+    - family: 'Fira Code'
+      source: google
+    - family: 'Inter'
+      source: google
+  base: Inter
+  headings: 'Fira Code'
