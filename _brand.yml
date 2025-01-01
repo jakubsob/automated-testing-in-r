@@ -3,12 +3,16 @@ color:
     sky: "#262B36"
     malibu: "#82B1FF"
     marine: "#77C0CA"
+    green: "#37A577"
   background: white
-  foreground: sky
-  primary: marine
+  foreground: black
+  primary: green
+  secondary: sky
+  tertiary: sky
+  danger: white
 
-logo:
-  medium: cover.png
+# logo:
+#   medium: cover.png
 
 typography:
   fonts:
@@ -16,5 +20,7 @@ typography:
       source: google
     - family: 'Inter'
       source: google
+    - family: 'Raleway'
+      source: google
   base: Inter
-  headings: 'Fira Code'
+  headings: 'Raleway'

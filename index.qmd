@@ -1,5 +1,37 @@
+::: {.callout-important title="This book is a work in progress. 🚧"}
+To read about automated testing in R, visit my <a href="https://jakubsob.github.io/blog" target="_blank">blog</a>.
+:::
+
 # Preface {.unnumbered}
 
-This is a Quarto book.
+Testing can feel like a chore.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+You’re coding away, everything seems fine—until it isn’t. A bug pops up. You fix it, but then something else breaks. It’s frustrating, time-consuming, and stressful. But what if it didn’t have to be? What if testing wasn’t just about catching bugs, but about making your work smoother, faster, and more reliable?
+
+That’s what this book is about.
+
+R has grown from a tool for statisticians into a powerful programming language used for everything from exploratory data analysis to building Shiny apps and production-grade data pipelines. But as your projects grow, so do the risks. Code becomes harder to change. Bugs creep in. Shipping features slows down.
+
+Testing can change that.
+
+With automated testing, you can catch problems early, make changes with confidence, and keep your code in shape no matter how complex it gets. It’s not just about preventing errors — it’s about giving yourself the freedom to experiment and innovate without fear.
+
+This book is your guide to testing in R.
+
+We’ll start with the fundamentals: why testing matters, what makes a good test, and how to think like a tester. From there, we’ll get into the practical stuff. You’ll learn how to write unit tests, handle tricky scenarios with mocks and stubs, and test Shiny apps. We’ll cover advanced techniques, like snapshot testing and strategies for tackling legacy code.
+
+But this isn’t just about the "how." It’s about the "why."
+
+Testing isn’t just a skill — it’s a mindset. It’s about approaching your work with care and confidence. It’s about solving problems before they happen. And it’s about making sure the code you write today won’t break tomorrow.
+
+Whether you’re building packages, working on Shiny apps, or writing scripts for data analysis, this book will show you how testing can make your life easier — and your code better.
+
+Let’s get started.
+
+---
+
+The book assumes you have some experience with unit-testing and using [{testthat}](https://testthat.r-lib.org/index.html). If you are new to unit testing in R, I recommend you to read the [{testthat} documentation](https://testthat.r-lib.org/index.html) first.
+
+# License
+
+This book is licensed to you under [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/).

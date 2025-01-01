@@ -2,19 +2,33 @@ project:
   type: book
 
 book:
-  title: "Testing in R"
+  title: "Automated Testing in R"
   author: "Jakub Sobolewski"
-  date: "12/1/2024"
+  date: "01/1/2025"
+  google-analytics: "UA-XXXXXXXX"
+  repo-url: https://github.com/jakubsob/automated-testing-in-r/
+  page-footer:
+    border: true
+    center: "Copyright 2025, Jakub Sobolewski"
+    right:
+      - icon: github
+        href: https://github.com/jakubsob
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jakub-sobolewski-r/
+  sidebar:
+    style: floating
+    collapse-level: 2
+
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
     - references.qmd
 
 bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - brand
+    code-copy: true
   pdf:
     documentclass: scrreprt
