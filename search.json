@@ -8,5 +8,55 @@
     "crumbs": [
       "Preface"
     ]
+  },
+  {
+    "objectID": "anatomy-of-a-test.html",
+    "href": "anatomy-of-a-test.html",
+    "title": "1  Anatomy of a test",
+    "section": "",
+    "text": "1.1 Arrange\nA good test makes it clear what it’s checking.\nWhen a test mixes setup, running the system, and checking results, it gets confusing. Separating these steps into clear phases helps make the test’s purpose obvious. This way, anyone reading the test can follow along easily.\nWe can make this separation explicit with Arrange, Act, Assert comments.\nThose comments aren’t just for show. They help you structure your tests and keep them focused. They also make it easier to spot missing steps or unnecessary complexity. They keep your tests consistent, which makes them easier to read and maintain.\nIf you are starting to write a test, put those comments in place first, then fill in the blanks.\nThe first part of each test should setup the environment for the tested code.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
+  },
+  {
+    "objectID": "anatomy-of-a-test.html#arrange",
+    "href": "anatomy-of-a-test.html#arrange",
+    "title": "1  Anatomy of a test",
+    "section": "",
+    "text": "test_that(\"...\", {\n  # Arrange \n  machine &lt;- deep_thought$connect() \n  question &lt;- \"Everything\" \n\n  # Act\n\n  # Assert\n\n})",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
+  },
+  {
+    "objectID": "anatomy-of-a-test.html#act",
+    "href": "anatomy-of-a-test.html#act",
+    "title": "1  Anatomy of a test",
+    "section": "1.2 Act",
+    "text": "1.2 Act\nThe second part of each test is to call the code that’s being tested.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act \n  result &lt;- the_ultimate_question_of(machine, question) \n\n  # Assert\n\n})",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
+  },
+  {
+    "objectID": "anatomy-of-a-test.html#assert",
+    "href": "anatomy-of-a-test.html#assert",
+    "title": "1  Anatomy of a test",
+    "section": "1.3 Assert",
+    "text": "1.3 Assert\nThe third part of each test is to assert that the code behaves as expected.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act\n  result &lt;- the_ultimate_question_of(machine, question)\n\n  # Assert \n  expect_equal(result, 42) \n})",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
+  },
+  {
+    "objectID": "anatomy-of-a-test.html#teardown-if-needed",
+    "href": "anatomy-of-a-test.html#teardown-if-needed",
+    "title": "1  Anatomy of a test",
+    "section": "1.4 Teardown if needed",
+    "text": "1.4 Teardown if needed\nIf we need to free resources, we should do that at the end of the test.\ntest_that(\" \", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act\n  result &lt;- the_ultimate_question_of(machine, question)\n\n  # Assert\n  expect_equal(result, 42)\n\n  machine$disconnect() \n})",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
   }
 ]

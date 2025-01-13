@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Page Not Found – Automated Testing in R</title>
+<title>1&nbsp; Anatomy of a test – Automated Testing in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="/site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="/site_libs/quarto-nav/headroom.min.js"></script>
-<script src="/site_libs/clipboard/clipboard.min.js"></script>
-<script src="/site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="/site_libs/quarto-search/fuse.min.js"></script>
-<script src="/site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="/">
-<script src="/site_libs/quarto-html/quarto.js"></script>
-<script src="/site_libs/quarto-html/popper.min.js"></script>
-<script src="/site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="/site_libs/quarto-html/anchor.min.js"></script>
-<link href="/site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="/site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="/site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="/site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="/site_libs/bootstrap/bootstrap-060a24360f4d4c3eb97b5e1443abc0a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-060a24360f4d4c3eb97b5e1443abc0a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -79,22 +115,78 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Automated Testing in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jakubsob/automated-testing-in-r/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./anatomy-of-a-test.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link active" data-scroll-target="#arrange"><span class="header-section-number">1.1</span> Arrange</a></li>
+  <li><a href="#act" id="toc-act" class="nav-link" data-scroll-target="#act"><span class="header-section-number">1.2</span> Act</a></li>
+  <li><a href="#assert" id="toc-assert" class="nav-link" data-scroll-target="#assert"><span class="header-section-number">1.3</span> Assert</a></li>
+  <li><a href="#teardown-if-needed" id="toc-teardown-if-needed" class="nav-link" data-scroll-target="#teardown-if-needed"><span class="header-section-number">1.4</span> Teardown if needed</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Page Not Found</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></h1>
 </div>
 
 
@@ -111,10 +203,74 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 </header>
 
 
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page’s new location.</p>
+<p>A good test makes it clear what it’s checking.</p>
+<p>When a test mixes setup, running the system, and checking results, it gets confusing. Separating these steps into clear phases helps make the test’s purpose obvious. This way, anyone reading the test can follow along easily.</p>
+<p>We can make this separation explicit with Arrange, Act, Assert comments.</p>
+<p>Those comments aren’t just for show. They help you structure your tests and keep them focused. They also make it easier to spot missing steps or unnecessary complexity. They keep your tests consistent, which makes them easier to read and maintain.</p>
+<p>If you are starting to write a test, put those comments in place first, then fill in the blanks.</p>
+<section id="arrange" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="arrange"><span class="header-section-number">1.1</span> Arrange</h2>
+<p>The first part of each test should setup the environment for the tested code.</p>
+<div class="sourceCode" id="cb1" data-code-line-numbers="2,3,4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="co"># Arrange </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>() </span>
+<span id="cb1-4"><a href="#cb1-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="co"># Act</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="co"># Assert</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="act" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="act"><span class="header-section-number">1.2</span> Act</h2>
+<p>The second part of each test is to call the code that’s being tested.</p>
+<div class="sourceCode" id="cb2" data-code-line-numbers="6,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="co"># Arrange</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="co"># Act </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question) </span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="co"># Assert</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="assert" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="assert"><span class="header-section-number">1.3</span> Assert</h2>
+<p>The third part of each test is to assert that the code behaves as expected.</p>
+<div class="sourceCode" id="cb3" data-code-line-numbers="9,10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="co"># Arrange</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="co"># Act</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="co"># Assert </span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">expect_equal</span>(result, <span class="dv">42</span>) </span>
+<span id="cb3-11"><a href="#cb3-11"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="teardown-if-needed" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="teardown-if-needed"><span class="header-section-number">1.4</span> Teardown if needed</h2>
+<p>If we need to free resources, we should do that at the end of the test.</p>
+<div class="sourceCode" id="cb4" data-code-line-numbers="12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">test_that</span>(<span class="st">" "</span>, {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="co"># Arrange</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="co"># Act</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question)</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="co"># Assert</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">expect_equal</span>(result, <span class="dv">42</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  machine<span class="sc">$</span><span class="fu">disconnect</span>() </span>
+<span id="cb4-13"><a href="#cb4-13"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -534,6 +690,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -565,4 +730,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>
