@@ -1,0 +1,89 @@
+---
+title: "Anatomy of a test"
+format: html
+filters:
+  - line-highlight
+---
+
+A good test makes it clear what it's checking.
+
+When a test mixes setup, running the system, and checking results, it gets confusing. Separating these steps into clear phases helps make the test’s purpose obvious. This way, anyone reading the test can follow along easily.
+
+We can make this separation explicit with Arrange, Act, Assert comments.
+
+Those comments aren't just for show. They help you structure your tests and keep them focused. They also make it easier to spot missing steps or unnecessary complexity. They keep your tests consistent, which makes them easier to read and maintain.
+
+If you are starting to write a test, put those comments in place first, then fill in the blanks.
+
+## Arrange
+
+The first part of each test should setup the environment for the tested code.
+
+```r
+test_that("...", {
+  # Arrange #<<
+  machine <- deep_thought$connect() #<<
+  question <- "Everything" #<<
+
+  # Act
+
+  # Assert
+
+})
+```
+
+## Act
+
+The second part of each test is to call the code that's being tested.
+
+```r
+test_that("...", {
+  # Arrange
+  machine <- deep_thought$connect()
+  question <- "Everything"
+
+  # Act #<<
+  result <- the_ultimate_question_of(machine, question) #<<
+
+  # Assert
+
+})
+```
+
+## Assert
+
+The third part of each test is to assert that the code behaves as expected.
+
+```r
+test_that("...", {
+  # Arrange
+  machine <- deep_thought$connect()
+  question <- "Everything"
+
+  # Act
+  result <- the_ultimate_question_of(machine, question)
+
+  # Assert #<<
+  expect_equal(result, 42) #<<
+})
+```
+
+## Teardown if needed
+
+If we need to free resources, we should do that at the end of the test.
+
+```r
+test_that(" ", {
+  # Arrange
+  machine <- deep_thought$connect()
+  question <- "Everything"
+
+  # Act
+  result <- the_ultimate_question_of(machine, question)
+
+  # Assert
+  expect_equal(result, 42)
+
+  machine$disconnect() #<<
+})
+```

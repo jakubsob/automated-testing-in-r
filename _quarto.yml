@@ -21,11 +21,13 @@ book:
 
   chapters:
     - index.qmd
+    - anatomy-of-a-test.qmd
 
 format:
   html:
     theme:
       - brand
     code-copy: true
+    code-line-numbers: true
   pdf:
     documentclass: scrreprt
