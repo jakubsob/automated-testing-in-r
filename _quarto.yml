@@ -9,7 +9,7 @@ book:
   repo-url: https://github.com/jakubsob/automated-testing-in-r/
   page-footer:
     border: true
-    center: "Copyright 2025, Jakub Sobolewski"
+    center: "Automated Testing in R © 2025 by Jakub Sobolewski is licensed under CC BY-NC-ND 4.0"
     right:
       - icon: github
         href: https://github.com/jakubsob
