@@ -21,7 +21,10 @@ book:
 
   chapters:
     - index.qmd
-    - anatomy-of-a-test.qmd
+    - part: "Testing fundamentals"
+      chapters:
+      - anatomy-of-a-test.qmd
+      - types-of-tests.qmd
 
 format:
   html:
