@@ -23,7 +23,7 @@ The first part of each test should setup the environment for the tested code.
 test_that("...", {
   # Arrange #<<
   machine <- deep_thought$connect() #<<
-  question <- "Everything" #<<
+  question <- "What is the answer to life, the universe, and everything?" #<<
 
   # Act
 
@@ -40,10 +40,10 @@ The second part of each test is to call the code that's being tested.
 test_that("...", {
   # Arrange
   machine <- deep_thought$connect()
-  question <- "Everything"
+  question <- "What is the answer to life, the universe, and everything?"
 
   # Act #<<
-  result <- the_ultimate_question_of(machine, question) #<<
+  result <- ask_question(machine, question) #<<
 
   # Assert
 
@@ -58,10 +58,10 @@ The third part of each test is to assert that the code behaves as expected.
 test_that("...", {
   # Arrange
   machine <- deep_thought$connect()
-  question <- "Everything"
+  question <- "What is the answer to life, the universe, and everything?"
 
   # Act
-  result <- the_ultimate_question_of(machine, question)
+  result <- ask_question(machine, question)
 
   # Assert #<<
   expect_equal(result, 42) #<<
@@ -76,10 +76,10 @@ If we need to free resources, we should do that at the end of the test.
 test_that(" ", {
   # Arrange
   machine <- deep_thought$connect()
-  question <- "Everything"
+  question <- "What is the answer to life, the universe, and everything?"
 
   # Act
-  result <- the_ultimate_question_of(machine, question)
+  result <- ask_question(machine, question)
 
   # Assert
   expect_equal(result, 42)
