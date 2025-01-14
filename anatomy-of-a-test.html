@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./types-of-tests.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -124,7 +125,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html">Testing fundamentals</a></li><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -158,12 +159,29 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Testing fundamentals</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anatomy-of-a-test.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./types-of-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -184,7 +202,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html">Testing fundamentals</a></li><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></h1>
 </div>
@@ -214,7 +232,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb1" data-code-line-numbers="2,3,4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
 <span id="cb1-2"><a href="#cb1-2"></a>  <span class="co"># Arrange </span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>() </span>
-<span id="cb1-4"><a href="#cb1-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span> </span>
+<span id="cb1-4"><a href="#cb1-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"What is the answer to life, the universe, and everything?"</span> </span>
 <span id="cb1-5"><a href="#cb1-5"></a></span>
 <span id="cb1-6"><a href="#cb1-6"></a>  <span class="co"># Act</span></span>
 <span id="cb1-7"><a href="#cb1-7"></a></span>
@@ -228,10 +246,10 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb2" data-code-line-numbers="6,7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="co"># Arrange</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"What is the answer to life, the universe, and everything?"</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a>  <span class="co"># Act </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question) </span>
+<span id="cb2-7"><a href="#cb2-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">ask_question</span>(machine, question) </span>
 <span id="cb2-8"><a href="#cb2-8"></a></span>
 <span id="cb2-9"><a href="#cb2-9"></a>  <span class="co"># Assert</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a></span>
@@ -243,10 +261,10 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb3" data-code-line-numbers="9,10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">test_that</span>(<span class="st">"..."</span>, {</span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="co"># Arrange</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"What is the answer to life, the universe, and everything?"</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
 <span id="cb3-6"><a href="#cb3-6"></a>  <span class="co"># Act</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">ask_question</span>(machine, question)</span>
 <span id="cb3-8"><a href="#cb3-8"></a></span>
 <span id="cb3-9"><a href="#cb3-9"></a>  <span class="co"># Assert </span></span>
 <span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">expect_equal</span>(result, <span class="dv">42</span>) </span>
@@ -258,10 +276,10 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb4" data-code-line-numbers="12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">test_that</span>(<span class="st">" "</span>, {</span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="co"># Arrange</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>  machine <span class="ot">&lt;-</span> deep_thought<span class="sc">$</span><span class="fu">connect</span>()</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"Everything"</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  question <span class="ot">&lt;-</span> <span class="st">"What is the answer to life, the universe, and everything?"</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a></span>
 <span id="cb4-6"><a href="#cb4-6"></a>  <span class="co"># Act</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">the_ultimate_question_of</span>(machine, question)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">ask_question</span>(machine, question)</span>
 <span id="cb4-8"><a href="#cb4-8"></a></span>
 <span id="cb4-9"><a href="#cb4-9"></a>  <span class="co"># Assert</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">expect_equal</span>(result, <span class="dv">42</span>)</span>
@@ -697,6 +715,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./types-of-tests.html" class="pagination-link" aria-label="Types of tests">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

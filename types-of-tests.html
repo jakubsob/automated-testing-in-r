@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jakub Sobolewski">
-<meta name="dcterms.date" content="2025-01-01">
 
-<title>Automated Testing in R</title>
+<title>2&nbsp; Types of tests – Automated Testing in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./anatomy-of-a-test.html" rel="next">
+<link href="./anatomy-of-a-test.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -42,6 +74,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-060a24360f4d4c3eb97b5e1443abc0a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -91,7 +124,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html">Testing fundamentals</a></li><li class="breadcrumb-item"><a href="./types-of-tests.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -121,7 +154,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -142,7 +175,7 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./types-of-tests.html" class="sidebar-item-text sidebar-link">
+  <a href="./types-of-tests.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></span></a>
   </div>
 </li>
@@ -158,36 +191,37 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
-  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  <li><a href="#direct-response-tests" id="toc-direct-response-tests" class="nav-link active" data-scroll-target="#direct-response-tests"><span class="header-section-number">2.1</span> Direct Response Tests</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
+  </ul></li>
+  <li><a href="#state-change-tests" id="toc-state-change-tests" class="nav-link" data-scroll-target="#state-change-tests"><span class="header-section-number">2.2</span> State Change Tests</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#tips-1" id="toc-tips-1" class="nav-link" data-scroll-target="#tips-1">Tips</a></li>
+  </ul></li>
+  <li><a href="#interaction-tests" id="toc-interaction-tests" class="nav-link" data-scroll-target="#interaction-tests"><span class="header-section-number">2.3</span> Interaction Tests</a>
+  <ul class="collapse">
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  <li><a href="#tips-2" id="toc-tips-2" class="nav-link" data-scroll-target="#tips-2">Tips</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anatomy-of-a-test.html">Testing fundamentals</a></li><li class="breadcrumb-item"><a href="./types-of-tests.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Automated Testing in R</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Types of tests</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jakub Sobolewski </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 1, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -197,41 +231,110 @@ gtag('config', 'G-735BLDHJRX', { 'anonymize_ip': true});
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled" title="This book is a work in progress. 🚧">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-This book is a work in progress. 🚧
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To read about automated testing in R, visit my <a href="https://jakubsob.github.io/blog" target="_blank">blog</a>.</p>
-</div>
-</div>
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>Testing can feel like a chore.</p>
-<p>You’re coding away, everything seems fine—until it isn’t. A bug pops up. You fix it, but then something else breaks. It’s frustrating, time-consuming, and stressful. But what if it didn’t have to be? What if testing wasn’t just about catching bugs, but about making your work smoother, faster, and more reliable?</p>
-<p>That’s what this book is about.</p>
-<p>R has grown from a tool for statisticians into a powerful programming language used for everything from exploratory data analysis to building Shiny apps and production-grade data pipelines. But as your projects grow, so do the risks. Code becomes harder to change. Bugs creep in. Shipping features slows down.</p>
-<p>Testing can change that.</p>
-<p>With automated testing, you can catch problems early, make changes with confidence, and keep your code in shape no matter how complex it gets. It’s not just about preventing errors — it’s about giving yourself the freedom to experiment and innovate without fear.</p>
-<p>This book is your guide to testing in R.</p>
-<p>We’ll start with the fundamentals: why testing matters, what makes a good test, and how to think like a tester. From there, we’ll get into the practical stuff. You’ll learn how to write unit tests, handle tricky scenarios with mocks and stubs, and test Shiny apps. We’ll cover advanced techniques, like snapshot testing and strategies for tackling legacy code.</p>
-<p>But this isn’t just about the “how.” It’s about the “why.”</p>
-<p>Testing isn’t just a skill — it’s a mindset. It’s about approaching your work with care and confidence. It’s about solving problems before they happen. And it’s about making sure the code you write today won’t break tomorrow.</p>
-<p>Whether you’re building packages, working on Shiny apps, or writing scripts for data analysis, this book will show you how testing can make your life easier — and your code better.</p>
-<p>Let’s get started.</p>
-<hr>
-<p>The book assumes you have some experience with unit-testing and using <a href="https://testthat.r-lib.org/index.html">{testthat}</a>. If you are new to unit testing in R, I recommend you to read the <a href="https://testthat.r-lib.org/index.html">{testthat} documentation</a> first.</p>
+<p>To make it easier to think about what to test and to make a more informed decision on how we need to test it, we may categorize tests into:</p>
+<ul>
+<li>Direct Response Tests.</li>
+<li>State Change Tests.</li>
+<li>Interaction Tests.</li>
+</ul>
+<p>Let’s see in what circumstances should each type be used.</p>
+<section id="direct-response-tests" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="direct-response-tests"><span class="header-section-number">2.1</span> Direct Response Tests</h2>
+<ul>
+<li>They check whether a return value or an exception matches the expectation.</li>
+<li>These tests ensure that the core functionality of the code works correctly.</li>
+</ul>
+<section id="example" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="example">Example</h3>
+<div class="sourceCode" id="cb1" data-code-line-numbers=""><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">describe</span>(<span class="st">"Stack"</span>, {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">it</span>(<span class="st">"should return the last pushed value when popping an item"</span>, {</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="co"># Arrange</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    my_stack <span class="ot">&lt;-</span> Stack<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    my_stack<span class="sc">$</span><span class="fu">push</span>(<span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="co"># Act</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>    value <span class="ot">&lt;-</span> my_stack<span class="sc">$</span><span class="fu">pop</span>()</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="co"># Assert</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="fu">expect_equal</span>(value, <span class="dv">1</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>  })</span>
+<span id="cb1-13"><a href="#cb1-13"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="license" class="level1">
-<h1>License</h1>
-<p>This book is licensed to you under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</p>
+<section id="tips" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tips">Tips</h3>
+<ul>
+<li>Don’t test a lot of different values if the new combination doesn’t test new behavior. Testing <code>mean(1:10)</code> and then <code>mean(1:100)</code> doesn’t improve our confidence that <code>mean</code> function works as expected.</li>
+<li>Use assertions to convey intent. If you don’t care about the order of a vector, consider using <code>testthat::expect_setequal</code> instead of <code>testthat::expect_equal</code> to only assert on its content.</li>
+<li>Don’t duplicate assertions. If you already use <code>testthat::expect_equal</code> on a vector, does adding an assertion on its length with <code>testthat::expect_length</code> add more safety? Adding more assertions than needed will only make the test more difficult to change in the future.</li>
+</ul>
+</section>
+</section>
+<section id="state-change-tests" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="state-change-tests"><span class="header-section-number">2.2</span> State Change Tests</h2>
+<ul>
+<li>These tests help validate the impact of certain actions on the system’s state.</li>
+<li>They confirm that the behavior results in the expected changes, such as modifying a list and confirming its size change.</li>
+</ul>
+<section id="example-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="example-1">Example</h3>
+<div class="sourceCode" id="cb2" data-code-line-numbers=""><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">describe</span>(<span class="st">"Stack"</span>, {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">it</span>(<span class="st">"should not be empty after pushing an item"</span>, {</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="co"># Arrange</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    my_stack <span class="ot">&lt;-</span> Stack<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="co"># Act</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    my_stack<span class="sc">$</span><span class="fu">push</span>(<span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="co"># Assert</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="fu">expect_false</span>(my_stack<span class="sc">$</span><span class="fu">empty</span>())</span>
+<span id="cb2-11"><a href="#cb2-11"></a>  })</span>
+<span id="cb2-12"><a href="#cb2-12"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tips-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tips-1">Tips</h3>
+<ul>
+<li>Don’t share state between tests. It may make tests more fragile and more difficult to understand.</li>
+<li>Avoid iteration. Don’t check if <code>Stack</code> can handle 0, 1, 2, 3, 4, …, calls to <code>push</code>. Use chicken counting: <strong>zero, one, or many.</strong></li>
+</ul>
+</section>
+</section>
+<section id="interaction-tests" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="interaction-tests"><span class="header-section-number">2.3</span> Interaction Tests</h2>
+<ul>
+<li>These tests ensure proper communication and integration between different parts of the system.</li>
+<li>These tests examine how code interacts with external components, often simulating dependencies or external services. <strong><a href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html">Mocks, Fakes, Stubs and Dummies</a></strong> are used to control these interactions and validate that the code interacts correctly with external entities.</li>
+</ul>
+<section id="example-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="example-2">Example</h3>
+<div class="sourceCode" id="cb3" data-code-line-numbers=""><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">describe</span>(<span class="st">"Stack"</span>, {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">it</span>(<span class="st">"should log what item has been pushed"</span>, {</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="co"># Arrange</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    logger <span class="ot">&lt;-</span> mockery<span class="sc">::</span><span class="fu">mock</span>()</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    my_stack <span class="ot">&lt;-</span> Stack<span class="sc">$</span><span class="fu">new</span>(logger)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="co"># Act</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    my_stack<span class="sc">$</span><span class="fu">push</span>(<span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="co"># Assert</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    mockery<span class="sc">::</span><span class="fu">expect_args</span>(</span>
+<span id="cb3-12"><a href="#cb3-12"></a>      logger,</span>
+<span id="cb3-13"><a href="#cb3-13"></a>      <span class="at">n =</span> <span class="dv">1</span>,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>      <span class="st">"Pushed 1 onto the stack"</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>    )</span>
+<span id="cb3-16"><a href="#cb3-16"></a>  })</span>
+<span id="cb3-17"><a href="#cb3-17"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tips-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tips-2">Tips</h3>
+<ul>
+<li>Complex mock will make tests brittle and difficult to understand. They typically need to be created when interactions in the code are complex or not defined well enough.</li>
+<li>Notice how much setup is needed to run a test. Use this feedback to improve and simplify production code. Code that is easy to test is easier to maintain.</li>
+<li>Don’t overdo them. There is a risk that you mock so many things that the test doesn’t resemble the actual behavior of the system anymore.</li>
+<li>Mock public interfaces of objects, otherwise you risk spilling implementation details into the test.</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -654,11 +757,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./anatomy-of-a-test.html" class="pagination-link" aria-label="Anatomy of a test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./anatomy-of-a-test.html" class="pagination-link" aria-label="Anatomy of a test">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Anatomy of a test</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -692,4 +795,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>

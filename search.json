@@ -16,6 +16,7 @@
     "section": "",
     "text": "1.1 Arrange\nA good test makes it clear what it’s checking.\nWhen a test mixes setup, running the system, and checking results, it gets confusing. Separating these steps into clear phases helps make the test’s purpose obvious. This way, anyone reading the test can follow along easily.\nWe can make this separation explicit with Arrange, Act, Assert comments.\nThose comments aren’t just for show. They help you structure your tests and keep them focused. They also make it easier to spot missing steps or unnecessary complexity. They keep your tests consistent, which makes them easier to read and maintain.\nIf you are starting to write a test, put those comments in place first, then fill in the blanks.\nThe first part of each test should setup the environment for the tested code.",
     "crumbs": [
+      "Testing fundamentals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
     ]
   },
@@ -24,8 +25,9 @@
     "href": "anatomy-of-a-test.html#arrange",
     "title": "1  Anatomy of a test",
     "section": "",
-    "text": "test_that(\"...\", {\n  # Arrange \n  machine &lt;- deep_thought$connect() \n  question &lt;- \"Everything\" \n\n  # Act\n\n  # Assert\n\n})",
+    "text": "test_that(\"...\", {\n  # Arrange \n  machine &lt;- deep_thought$connect() \n  question &lt;- \"What is the answer to life, the universe, and everything?\" \n\n  # Act\n\n  # Assert\n\n})",
     "crumbs": [
+      "Testing fundamentals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
     ]
   },
@@ -34,8 +36,9 @@
     "href": "anatomy-of-a-test.html#act",
     "title": "1  Anatomy of a test",
     "section": "1.2 Act",
-    "text": "1.2 Act\nThe second part of each test is to call the code that’s being tested.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act \n  result &lt;- the_ultimate_question_of(machine, question) \n\n  # Assert\n\n})",
+    "text": "1.2 Act\nThe second part of each test is to call the code that’s being tested.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"What is the answer to life, the universe, and everything?\"\n\n  # Act \n  result &lt;- ask_question(machine, question) \n\n  # Assert\n\n})",
     "crumbs": [
+      "Testing fundamentals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
     ]
   },
@@ -44,8 +47,9 @@
     "href": "anatomy-of-a-test.html#assert",
     "title": "1  Anatomy of a test",
     "section": "1.3 Assert",
-    "text": "1.3 Assert\nThe third part of each test is to assert that the code behaves as expected.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act\n  result &lt;- the_ultimate_question_of(machine, question)\n\n  # Assert \n  expect_equal(result, 42) \n})",
+    "text": "1.3 Assert\nThe third part of each test is to assert that the code behaves as expected.\ntest_that(\"...\", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"What is the answer to life, the universe, and everything?\"\n\n  # Act\n  result &lt;- ask_question(machine, question)\n\n  # Assert \n  expect_equal(result, 42) \n})",
     "crumbs": [
+      "Testing fundamentals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
     ]
   },
@@ -54,9 +58,54 @@
     "href": "anatomy-of-a-test.html#teardown-if-needed",
     "title": "1  Anatomy of a test",
     "section": "1.4 Teardown if needed",
-    "text": "1.4 Teardown if needed\nIf we need to free resources, we should do that at the end of the test.\ntest_that(\" \", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"Everything\"\n\n  # Act\n  result &lt;- the_ultimate_question_of(machine, question)\n\n  # Assert\n  expect_equal(result, 42)\n\n  machine$disconnect() \n})",
+    "text": "1.4 Teardown if needed\nIf we need to free resources, we should do that at the end of the test.\ntest_that(\" \", {\n  # Arrange\n  machine &lt;- deep_thought$connect()\n  question &lt;- \"What is the answer to life, the universe, and everything?\"\n\n  # Act\n  result &lt;- ask_question(machine, question)\n\n  # Assert\n  expect_equal(result, 42)\n\n  machine$disconnect() \n})",
     "crumbs": [
+      "Testing fundamentals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Anatomy of a test</span>"
+    ]
+  },
+  {
+    "objectID": "types-of-tests.html",
+    "href": "types-of-tests.html",
+    "title": "2  Types of tests",
+    "section": "",
+    "text": "2.1 Direct Response Tests\nTo make it easier to think about what to test and to make a more informed decision on how we need to test it, we may categorize tests into:\nLet’s see in what circumstances should each type be used.",
+    "crumbs": [
+      "Testing fundamentals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of tests</span>"
+    ]
+  },
+  {
+    "objectID": "types-of-tests.html#direct-response-tests",
+    "href": "types-of-tests.html#direct-response-tests",
+    "title": "2  Types of tests",
+    "section": "",
+    "text": "They check whether a return value or an exception matches the expectation.\nThese tests ensure that the core functionality of the code works correctly.\n\n\nExample\ndescribe(\"Stack\", {\n  it(\"should return the last pushed value when popping an item\", {\n    # Arrange\n    my_stack &lt;- Stack$new()\n    my_stack$push(1)\n\n    # Act\n    value &lt;- my_stack$pop()\n\n    # Assert\n    expect_equal(value, 1)\n  })\n})\n\n\nTips\n\nDon’t test a lot of different values if the new combination doesn’t test new behavior. Testing mean(1:10) and then mean(1:100) doesn’t improve our confidence that mean function works as expected.\nUse assertions to convey intent. If you don’t care about the order of a vector, consider using testthat::expect_setequal instead of testthat::expect_equal to only assert on its content.\nDon’t duplicate assertions. If you already use testthat::expect_equal on a vector, does adding an assertion on its length with testthat::expect_length add more safety? Adding more assertions than needed will only make the test more difficult to change in the future.",
+    "crumbs": [
+      "Testing fundamentals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of tests</span>"
+    ]
+  },
+  {
+    "objectID": "types-of-tests.html#state-change-tests",
+    "href": "types-of-tests.html#state-change-tests",
+    "title": "2  Types of tests",
+    "section": "2.2 State Change Tests",
+    "text": "2.2 State Change Tests\n\nThese tests help validate the impact of certain actions on the system’s state.\nThey confirm that the behavior results in the expected changes, such as modifying a list and confirming its size change.\n\n\nExample\ndescribe(\"Stack\", {\n  it(\"should not be empty after pushing an item\", {\n    # Arrange\n    my_stack &lt;- Stack$new()\n\n    # Act\n    my_stack$push(1)\n\n    # Assert\n    expect_false(my_stack$empty())\n  })\n})\n\n\nTips\n\nDon’t share state between tests. It may make tests more fragile and more difficult to understand.\nAvoid iteration. Don’t check if Stack can handle 0, 1, 2, 3, 4, …, calls to push. Use chicken counting: zero, one, or many.",
+    "crumbs": [
+      "Testing fundamentals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of tests</span>"
+    ]
+  },
+  {
+    "objectID": "types-of-tests.html#interaction-tests",
+    "href": "types-of-tests.html#interaction-tests",
+    "title": "2  Types of tests",
+    "section": "2.3 Interaction Tests",
+    "text": "2.3 Interaction Tests\n\nThese tests ensure proper communication and integration between different parts of the system.\nThese tests examine how code interacts with external components, often simulating dependencies or external services. Mocks, Fakes, Stubs and Dummies are used to control these interactions and validate that the code interacts correctly with external entities.\n\n\nExample\ndescribe(\"Stack\", {\n  it(\"should log what item has been pushed\", {\n    # Arrange\n    logger &lt;- mockery::mock()\n    my_stack &lt;- Stack$new(logger)\n\n    # Act\n    my_stack$push(1)\n\n    # Assert\n    mockery::expect_args(\n      logger,\n      n = 1,\n      \"Pushed 1 onto the stack\"\n    )\n  })\n})\n\n\nTips\n\nComplex mock will make tests brittle and difficult to understand. They typically need to be created when interactions in the code are complex or not defined well enough.\nNotice how much setup is needed to run a test. Use this feedback to improve and simplify production code. Code that is easy to test is easier to maintain.\nDon’t overdo them. There is a risk that you mock so many things that the test doesn’t resemble the actual behavior of the system anymore.\nMock public interfaces of objects, otherwise you risk spilling implementation details into the test.",
+    "crumbs": [
+      "Testing fundamentals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Types of tests</span>"
     ]
   }
 ]
