@@ -1,12 +1,21 @@
 project:
   type: book
 
+website:
+  announcement:
+    icon: info-circle
+    dismissable: true
+    content: "This book is a work in progress. 🚧 Visit my <a href='https://jakubsob.github.io/blog' target='_blank'>blog</a>"
+    type: warning
+    position: below-navbar
+
 book:
   title: "Automated Testing in R"
   author: "Jakub Sobolewski"
   date: "01/1/2025"
   google-analytics: "G-735BLDHJRX"
   repo-url: https://github.com/jakubsob/automated-testing-in-r/
+
   page-footer:
     border: true
     center: "Automated Testing in R © 2025 by Jakub Sobolewski is licensed under CC BY-NC-ND 4.0"

@@ -1,7 +1,3 @@
-::: {.callout-important title="This book is a work in progress. 🚧"}
-To read about automated testing in R, visit my <a href="https://jakubsob.github.io/blog" target="_blank">blog</a>.
-:::
-
 # Preface {.unnumbered}
 
 Testing can feel like a chore.
