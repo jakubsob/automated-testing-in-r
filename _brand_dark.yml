@@ -1,0 +1,30 @@
+color:
+  palette:
+    sky: "#262B36"
+    malibu: "#82B1FF"
+    marine: "#77C0CA"
+    green: "#37A577"
+  background: black
+  foreground: white
+  primary: green
+  secondary: sky
+  tertiary: sky
+  danger: white
+
+# logo:
+#   medium: cover.png
+
+typography:
+  fonts:
+    - family: 'Fira Code'
+      source: google
+    - family: 'Inter'
+      source: google
+    - family: 'Raleway'
+      source: google
+  base: Inter
+  headings: 'Raleway'
+  monospace-block:
+    background-color: "transparent"
+  monospace-inline:
+    background-color: "transparent"

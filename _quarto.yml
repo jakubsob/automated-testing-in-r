@@ -35,10 +35,12 @@ book:
       - anatomy-of-a-test.qmd
       - types-of-tests.qmd
 
+brand:
+  dark: _brand_dark.yml
+  light: _brand.yml
+
 format:
   html:
-    theme:
-      - brand
     code-copy: true
     code-line-numbers: true
   pdf:
